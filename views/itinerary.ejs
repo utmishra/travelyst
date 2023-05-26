@@ -1,0 +1,45 @@
+<h2 class="text-2xl mb-5">Tripadvisor Attractions</h2>
+<table class="table-auto mb-10">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Type</th>
+            <th>Opening Hours</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% taAttractions.forEach(attraction => { %>
+            <tr>
+                <td><a href="<%= attraction.url %>"><%= attraction.name %></a></td>
+                <td><%= attraction.rating %></td>
+                <td><%= attraction.type %></td>
+                <td><%= attraction.opening_hours || 'N/A' %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>
+
+<!-- Repeat the structure for other data sources: taRestaurants, gmAttractions, gmRestaurants -->
+
+<h2 class="text-2xl mb-5">Hotels</h2>
+<table class="table-auto mb-10">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Rating</th>
+            <th>Address</th>
+            <th>Cost</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% hotels.forEach(hotel => { %>
+            <tr>
+                <td><a href="<%= hotel.booking_url %>"><%= hotel.name %></a></td>
+                <td><%= hotel.rating %></td>
+                <td><%= hotel.address %></td>
+                <td><%= hotel.cost %></td>
+            </tr>
+        <% }); %>
+    </tbody>
+</table>

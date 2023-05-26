@@ -1,6 +1,7 @@
-const express = require('express');
+import express from 'express';
+import mainRoutes from './endpoints/main.js';
+
 const app = express();
-const mainRoutes = require('./endpoints/main.js');
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');

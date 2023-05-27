@@ -1,29 +1,29 @@
 <% if (!taAttractions.status) { %>
-    <%- include('error', {service: 'taAttractions', error: taAttractions.data}) %>
+<%- include('error', {service: 'taAttractions', error: taAttractions.data}) %>
 <% } else { %>
-    <%- include('taAttractions') %>
+<%- include('taAttractions') %>
 <% } %>
 
 <% if (!taRestaurants.status) { %>
-    <%- include('error', {service: 'taRestaurants', error: taRestaurants.data}) %>
+<%- include('error', {service: 'taRestaurants', error: taRestaurants.data}) %>
 <% } else { %>
-    <%- include('taRestaurants') %>
+<%- include('taRestaurants') %>
 <% } %>
 
 <% if (!gmAttractions.status) { %>
-    <%- include('error', {service: 'gmAttractions', error: gmAttractions.data}) %>
+<%- include('error', {service: 'gmAttractions', error: gmAttractions.data}) %>
 <% } else { %>
-    <%- include('gmAttractions') %>
+<%- include('gmAttractions') %>
 <% } %>
 
 <% if (!gmRestaurants.status) { %>
-    <%- include('error', {service: 'gmRestaurants', error: gmRestaurants.data}) %>
+<%- include('error', {service: 'gmRestaurants', error: gmRestaurants.data}) %>
 <% } else { %>
-    <%- include('gmRestaurants') %>
+<%- include('gmRestaurants') %>
 <% } %>
 
 <% if (!hotels.status) { %>
-    <%- include('error', {service: 'hotels', error: hotels.data}) %>
+<%- include('error', {service: 'hotels', error: hotels.data}) %>
 <% } else { %>
-    <%- include('hotels') %>
+<%- include('hotels') %>
 <% } %>

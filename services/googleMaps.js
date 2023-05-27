@@ -2,10 +2,21 @@ import { Client } from "@googlemaps/google-maps-services-js";
 
 const client = new Client({});
 
-const summarizeOpeningHours = (openingHours) => {
+const summarizeOpeningHours = openingHours => {
   if (!openingHours) return null;
-  const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-  const formattedHours = openingHours.map((hour, i) => ({ day: days[i], hours: hour.split(': ')[1]}));
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const formattedHours = openingHours.map((hour, i) => ({
+    day: days[i],
+    hours: hour.split(": ")[1],
+  }));
   let summary = [];
   let currentDayRange = { startDay: null, endDay: null, hours: null };
 
@@ -14,17 +25,25 @@ const summarizeOpeningHours = (openingHours) => {
       currentDayRange.endDay = formattedHour.day;
     } else {
       if (currentDayRange.startDay) {
-        summary.push(`${currentDayRange.startDay} - ${currentDayRange.endDay}: ${currentDayRange.hours}`);
+        summary.push(
+          `${currentDayRange.startDay} - ${currentDayRange.endDay}: ${currentDayRange.hours}`
+        );
       }
-      currentDayRange = { startDay: formattedHour.day, endDay: formattedHour.day, hours: formattedHour.hours };
+      currentDayRange = {
+        startDay: formattedHour.day,
+        endDay: formattedHour.day,
+        hours: formattedHour.hours,
+      };
     }
   });
 
   // Push last range
-  summary.push(`${currentDayRange.startDay} - ${currentDayRange.endDay}: ${currentDayRange.hours}`);
-  
+  summary.push(
+    `${currentDayRange.startDay} - ${currentDayRange.endDay}: ${currentDayRange.hours}`
+  );
+
   return summary;
-}
+};
 
 const getAttractions = async city => {
   try {
@@ -46,7 +65,9 @@ const getAttractions = async city => {
         timeout: 1000,
       });
 
-      const summarisedOpeningHours = summarizeOpeningHours(attraction.data.result.opening_hours.weekday_text);
+      const summarisedOpeningHours = summarizeOpeningHours(
+        attraction.data.result.opening_hours.weekday_text
+      );
       return { ...attraction.data.result, summarisedOpeningHours };
     });
 
@@ -54,9 +75,7 @@ const getAttractions = async city => {
 
     return { status: true, service: "GoogleMaps", data: attractions };
   } catch (err) {
-    const errorMessage = err.response
-      ? err.response.data.error_message
-      : err;
+    const errorMessage = err.response ? err.response.data.error_message : err;
     console.error("Service: Google Maps, Error: ", errorMessage);
     return {
       status: false,
@@ -86,7 +105,9 @@ const getRestaurants = async city => {
         timeout: 1000,
       });
 
-      const summarisedOpeningHours = summarizeOpeningHours(restaurant.data.result.opening_hours.weekday_text);
+      const summarisedOpeningHours = summarizeOpeningHours(
+        restaurant.data.result.opening_hours.weekday_text
+      );
       return { ...restaurant.data.result, summarisedOpeningHours };
     });
 
@@ -94,9 +115,7 @@ const getRestaurants = async city => {
 
     return { status: true, data: restaurants };
   } catch (err) {
-    const errorMessage = err.response
-      ? err.response.data.error_message
-      : err;
+    const errorMessage = err.response ? err.response.data.error_message : err;
     console.error("Service: Google Maps, Error: ", errorMessage);
     return {
       status: false,

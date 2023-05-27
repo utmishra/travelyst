@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const getAttractions = async city => {
-  const url = `https://api.content.tripadvisor.com/api/v1/location/search?key=${process.env.TRIPADVISOR_API_KEY}&searchQuery=${city}&language=en`;
+  const url = `https://api.content.tripadvisor.com/api/v1/location/search?key=${process.env.TRIPADVISOR_API_KEY}&category=attractions&searchQuery=${city}&language=en`;
   const options = { method: "GET", headers: { accept: "application/json" } };
 
   try {
@@ -15,7 +15,8 @@ const getAttractions = async city => {
 
     return { status: true, data: attractions };
   } catch (err) {
-    console.error("Service: Tripadvisor, Error:", err.response.data.Message);
+    console.error("Service: Tripadvisor, Error:", err.response);
+    console.error("Referrer: ", err.request.res.rawHeaders);
     return {
       status: false,
       service: "taAttractions",
@@ -25,7 +26,7 @@ const getAttractions = async city => {
 };
 
 const getRestaurants = async city => {
-  const url = `https://api.content.tripadvisor.com/api/v1/location/search?key=${process.env.TRIPADVISOR_API_KEY}&searchQuery=${city}&language=en`;
+  const url = `https://api.content.tripadvisor.com/api/v1/location/search?key=${process.env.TRIPADVISOR_API_KEY}&category=restaurants&searchQuery=${city}&language=en`;
   console.info(`Calling: ${url}`);
   const options = { method: "GET", headers: { accept: "application/json" } };
 
@@ -41,6 +42,7 @@ const getRestaurants = async city => {
     return { status: true, data: restaurants };
   } catch (err) {
     console.error("Service: Tripadvisor, Error:", err.response.data.Message);
+    console.error("Referrer: ", err.request.res.rawHeaders);
     return {
       status: false,
       service: "taRestaurants",

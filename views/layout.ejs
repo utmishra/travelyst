@@ -1,20 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travelyst</title>
-    <link href="https://fonts.googleapis.com/css2?family=Handlee&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+    <title>travelyst</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair&display=swap" rel="stylesheet">
+    <link href="/dist/output.css" rel="stylesheet">
     <style>
-        body {
-            background-color: #f6adc6;
-            color: #ffffff;
-            font-family: 'Handlee', cursive;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair&display=swap');
+
+        /* Small devices (portrait tablets and large phones, 640px and up) */
+        @media (min-width: 640px) {
+            body {
+                font-size: 18px;
+            }
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media (min-width: 768px) {
+            body {
+                font-size: 22px;
+            }
+        }
+
+        /* Large devices (laptops/desktops, 1024px and up) */
+        @media (min-width: 1024px) {
+            body {
+                font-size: 25px;
+            }
+        }
+
+        /* Extra large devices (large laptops and desktops, 1280px and up) */
+        @media (min-width: 1280px) {
+            body {
+                font-size: 25px;
+            }
         }
     </style>
 </head>
-<body class="flex items-center justify-center h-screen">
-    <%- body %>
+
+<body
+    class="bg-pink-100 text-gray-600 font-handlee flex items-center justify-center h-screen m-0 p-5 gap-5 text-lg sm:text-xl md:text-2xl lg:text-4xl xl:text-4xl">
+    <div
+        class="container grid place-items-center w-full max-w-6xl border border-white rounded outline-gray-600 p-5 gap-5 box-border">
+        <%- body %>
+    </div>
 </body>
+
 </html>

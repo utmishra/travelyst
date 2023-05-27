@@ -21,6 +21,8 @@ const handleItinerary = async city => {
   const gmAttractions = await gmGetAttractions(city);
   const gmRestaurants = await gmGetRestaurants(city);
   const hotels = await getHotels(city);
+  console.log(`Total Google Attractions: `, gmAttractions.data.length);
+  console.log(`Total Google Restaurants: `, gmAttractions.data.length);
 
   return {
     taAttractions,
@@ -51,26 +53,7 @@ router.post("/itinerary", async (req, res) => {
   const city = req.body.city;
   console.log(`Requested city: ${city}`);
   const itineraryData = await handleItinerary(city);
-  if (
-    itineraryData.taAttractions.status === false ||
-    itineraryData.gmAttractions.status === false ||
-    itineraryData.taRestaurants.status === false ||
-    itineraryData.gmRestaurants.status === false ||
-    itineraryData.hotels.status === false
-  ) {
-    const errorService = Object.values(itineraryData).find(
-      service => service.status === false
-    );
-    console.error(`Error in ${errorService.service} service`);
-    console.error(itineraryData);
-    // console.error(itineraryData[errorService].data);
-    res.render("error", {
-      service: `${errorService.service} Service Error`,
-      error: errorService.data,
-    });
-  } else {
-    res.render("itinerary", itineraryData);
-  }
+  res.render("itinerary", itineraryData);
 });
 
 export default router;

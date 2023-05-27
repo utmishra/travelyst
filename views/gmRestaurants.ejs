@@ -1,0 +1,29 @@
+<% if (!gmRestaurants.status) { %>
+    <%- include('error', {service: gmRestaurants.service, error: gmRestaurants.data}) %>
+<% } else { %>
+    <h2 class="text-2xl mb-5">Google Maps Restaurants</h2>
+    <table class="table-auto mb-10 w-full rounded-lg overflow-hidden shadow-lg">
+        <thead class="bg-green-500 text-white">
+            <tr>
+                <th class="px-4 py-2">Name</th>
+                <th class="px-4 py-2 hidden sm:table-cell">Address</th>
+                <th class="px-4 py-2">Review count</th>
+                <th class="px-4 py-2">Opening Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% gmRestaurants.data.forEach(restaurant => { %>
+                <tr>
+                    <td class="border px-4 py-2">
+                        <a href="https://www.google.com/maps/search/?api=1&query=<%= encodeURIComponent(restaurant.formatted_address) %>">
+                            <%= restaurant.name %>
+                        </a>
+                    </td>
+                    <td class="border px-4 py-2 hidden sm:table-cell"><%= restaurant.formatted_address %></td>
+                    <td class="border px-4 py-2"><%= restaurant.user_ratings_total %></td>
+                    <td class="border px-4 py-2"><%= restaurant.summarisedOpeningHours.join("<br>") || 'N/A' %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+<% } %>

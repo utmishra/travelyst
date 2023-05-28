@@ -13,12 +13,22 @@ const app = express();
 
 app.set("view engine", "ejs");
 app.use(ejsLayouts);
+
 app.use("/dist", express.static("dist"));
 app.set("views", "views");
+
 app.use(cors());
+
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(upload.array());
+
+const setRefererHeader = (req, res, next) => {
+  req.headers.referer = process.env.HTTP_REFERER;
+  next();
+};
+
+app.use(setRefererHeader);
 
 app.use("/", mainRoutes);
 

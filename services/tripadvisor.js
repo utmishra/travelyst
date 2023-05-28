@@ -6,12 +6,13 @@ const getAttractions = async city => {
 
   try {
     const response = await axios(url, options);
-    const data = response.data.data;
+    const attractions = response.data.data;
+    console.log(response.headers.referer);
 
     // Filter attractions with a rating of 3.5 or above
-    const attractions = data.filter(
-      location => parseFloat(location.rating) > 3.5
-    );
+    // const attractions = data.filter(
+    //   location => parseFloat(location.rating) > 3.5
+    // );
 
     return { status: true, data: attractions };
   } catch (err) {
@@ -32,12 +33,13 @@ const getRestaurants = async city => {
 
   try {
     const response = await axios(url, options);
-    const data = response.data.data;
+    const restaurants = response.data.data;
+    console.log(response.headers.referer);
 
     // Filter restaurants with a rating of 3.5 or above
-    const restaurants = data.filter(
-      location => parseFloat(location.rating) >= 3.5
-    );
+    // const restaurants = data.filter(
+    //   location => parseFloat(location.rating) >= 3.5
+    // );
 
     return { status: true, data: restaurants };
   } catch (err) {
